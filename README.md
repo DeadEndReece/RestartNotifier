@@ -1,5 +1,4 @@
-
-  RestartNotifier V1.0 - A BeamMP plugin to notify players of scheduled server restarts with customizable warnings and manual trigger options.
+RestartNotifier V1.1 - A BeamMP plugin to notify players of multiple scheduled server restarts with timezone support, manual restart commands, and enhanced in-game configuration.
   By: DeadEndReece (UkDrifter) & Help with AI (People judge, but hey, if it does what you want thats all that matters right? - Reece 2026)
 
   Any issues or bugs can be reported in my discord (https://discord.com/invite/WDeb9fxuhq)
@@ -12,11 +11,15 @@
  
   3. Set so you are a authorized user by using the console command: r.au or restart.adduser <yourname> (without brackets & with your actual BeamMP username as it appears in-game CASE SENSITIVE).
 
-  4. Configure your desired restart time and timezone using the console commands (see commands section below).
+  4. Configure your desired restart times and timezone using the console commands (see commands section below).
 
   Features:
   
-  • Daily scheduled restart with timezone support and optional Daylight Saving Time adjustment.
+  • Multiple scheduled restarts (Max 4 limit) with timezone support and optional Daylight Saving Time adjustment.
+
+  • Interactive-style numbered menus for clean, aligned in-game and console status/list displays.
+
+  • Optimized CPU usage using non-blocking timers for the final server exit.
   
   • Customizable warning messages and intervals leading up to the restart.
   
@@ -30,11 +33,19 @@
  
   • User management system to allow specific players to access in-game commands without giving them full console access.
 
+
+
   Commands:
   
   • restart.status (r.s)             - Current status & countdown (In-Game & Console)
+
+  • restart.listtimes (r.lt)         - List all scheduled times (In-Game & Console)
   
-  • restart.settime (r.st) HH:MM     - Set daily restart time (Console Only)
+  • restart.addtime (r.at) HH:MM     - Add a scheduled restart time (Max 4) (Console Only)
+
+  • restart.removetime (r.rt) HH:MM  - Remove a scheduled restart time (Console Only)
+
+  • restart.cleartimes (r.ct)        - Clear all scheduled times (Console Only)
  
   • restart.settimezone (r.sz) <name>- Set timezone (EST, GMT, CET or UTC offset) (Console Only)
  
@@ -59,7 +70,7 @@
  
   • The plugin uses a single timer that ticks every second to check if it's time to send warnings or trigger the restart, which is more efficient than multiple timers for each warning.
  
-  • This script does NOT handle the actual restart process. It only sends chat messages as warnings and then calls exit() to shut down the server when the time comes. You will need to have an external process or script that automatically restarts the      server when it shuts down for this to work effectively. 
+  • This script does NOT handle the actual restart process. It only sends chat messages as warnings and then calls MP.Exit() to shut down the server safely when the time comes. You will need to have an external process or script that automatically restarts the server when it shuts down for this to work effectively. 
 
   Automatic Restart Setup:
   
